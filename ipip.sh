@@ -11,7 +11,7 @@ result=$(curl -s https://www.ipip.net/ip.html -H "User-Agent: Safari/537.36" -H 
 /bin/echo '<items>'
 
 
-address=`echo "$result" | grep '地理位置' -A 2 | head -n 3 |tail -n 1| sed -e 's/<[^>]*>//g' | sed "s/ //g"`
+address=`echo "$result" | grep '<td>地理位置</td>' -A 2 | tail -n 1 | sed "s/<\/span>//g" | sed "s/<span.*>//g" | sed "s/ //g" |sed "s/(.*)//g"`
 
 info=`echo "$result" |grep 'IDC' |head -n 2|tail -n 1 | sed -e 's/<[^>]*>//g' | sed "s/ //g" |sed "s/(.*)//g"`
 
